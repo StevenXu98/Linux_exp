@@ -94,7 +94,6 @@ int copy_process1(char* file_source_path,char* file_destination_path)
 		printf("Fork Error");		
 	else if(pid==0)
 		copy_folder(file_source_path,file_destination_path);
-		//execl("/home/tangjiaqi/test/copy", buffer,"/home/tangjiaqi/唐嘉岐",(char*)0);  
 	else if(wait(NULL)!=pid)
 		printf("A signal must have interrupted the wait\n");
 	else
@@ -112,7 +111,6 @@ int copy_process2(char* file_source_path,char* file_destination_path)
 	{
 		copy_file(file_source_path,file_destination_path);
 		printf("%s %s\n",file_source_path,file_destination_path);
-		//execl("/home/tangjiaqi/test/copy", buffer,"/home/tangjiaqi/唐嘉岐",(char*)0);
 	}  
 	else if(wait(NULL)!=pid)
 		printf("A signal must have interrupted the wait\n");
@@ -128,7 +126,7 @@ int main(int argc, char *argv[])
 	struct dirent* currentdp;
 	struct stat currentstat;
 	
-	mkdir("/home/tangjiaqi/唐嘉岐",0777);
+	mkdir("/home/xu/xuyiteng",0777);
 	
 
 	char* getcwd(char *buf,size_t size);	
@@ -137,7 +135,7 @@ int main(int argc, char *argv[])
 		printf("%s\n",buffer);
 	}
 	char* source_path=buffer;
-	char* destination_path="/home/tangjiaqi/唐嘉岐";
+	char* destination_path="/home/xu/xuyiteng";
 	if((dp1=opendir(buffer))==NULL)
 	{
 		printf("Open directory fail\n" );
