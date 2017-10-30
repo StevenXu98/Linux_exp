@@ -10,6 +10,8 @@
 #include <time.h>
 #include <sys/wait.h>
 #include <pthread.h>
+
+
 char* destinationPath;
 char* destinationPath2;
 int is_dir(char* path)
@@ -101,14 +103,6 @@ void *childthread2(char* rep){
 	return (void *)0;
 }
 
-
-int pthread_create(pthread_t *restrict tidp,
-				const pthread_attr_t *restrict attr,
-				void *(*start_rtn)(void *), 
-				void *restrict arg);
-
-int pthread_join(pthread_t thread,void **rval_ptr);
-
 int copy_process1(char* file_source_path,char* file_destination_path)
 {
 	int ret=0;
@@ -120,8 +114,7 @@ int copy_process1(char* file_source_path,char* file_destination_path)
 	{
 		printf("ERROR in create childthread");
 		return 1;
-	}
-	//execl("/home/tangjiaqi/test/copy", buffer,"/home/tangjiaqi/唐嘉岐",(char*)0);  
+	} 
 	pthread_join(tid,NULL);
 	printf("childthread exit\n");
 	return 0;
@@ -138,8 +131,7 @@ int copy_process2(char* file_source_path,char* file_destination_path)
 	{
 		printf("ERROR in create childthread");
 		return 1;
-	}
-	//execl("/home/tangjiaqi/test/copy", buffer,"/home/tangjiaqi/唐嘉岐",(char*)0);  
+	}  
 	pthread_join(tid,NULL);
 	printf("childthread exit\n");
 	return 0;
@@ -152,7 +144,7 @@ int main(int argc, char *argv[])
 	struct dirent* currentdp;
 	struct stat currentstat;
 	
-	mkdir("/home/tangjiaqi/唐嘉岐",0777);
+	mkdir("/home/xu/xuyiteng",0777);
 	
 
 	char* getcwd(char *buf,size_t size);	
@@ -161,7 +153,7 @@ int main(int argc, char *argv[])
 		printf("%s\n",buffer);
 	}
 	char* source_path=buffer;
-	char* destination_path="/home/tangjiaqi/唐嘉岐";
+	char* destination_path="/home/xu/xuyiteng";
 	if((dp1=opendir(buffer))==NULL)
 	{
 		printf("Open directory fail\n" );

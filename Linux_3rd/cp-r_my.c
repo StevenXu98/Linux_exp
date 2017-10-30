@@ -12,9 +12,9 @@
 /*保存文件路径的缓冲区大小*/
 #define PATH_SIZE 1024
 /*文件权限*/
-#define FILE_MODE 0664
+#define FILE_MODE 0777
 /*目录权限*/
-#define DIR_MODE 0664
+#define DIR_MODE 0777
 
 int fd[2] = {0};
 
@@ -93,9 +93,9 @@ void deal_copy(const char *old_file,const  char * pathname)
     int ret_stat = stat(pathname, &get_message);
     fd[1] = open(pathname, O_CREAT | O_TRUNC | O_RDWR, FILE_MODE);  
 
-    fd[0] = open(old_file, O_RDONLY);/*打开source文件*/
+    fd[0] = open(old_file, O_RDONLY);
 
-    read_write();/*进行source的读与对应的target的写(复制)*/
+    read_write();
 
     close(fd[0]);
     close(fd[1]);
@@ -104,18 +104,17 @@ void read_write(void)
 {
     char buf[BUF_SIZE] = {};
     int ret_read, ret_write;
-    while((ret_read = read(fd[0], buf, BUF_SIZE)) > 0){/*读到EOF时返回0结束*/
+    while((ret_read = read(fd[0], buf, BUF_SIZE)) > 0){
         ret_write = write(fd[1], buf, strlen(buf));
-        /*等效于ret_write = write(fd[1], buf, ret_read);*/
     }
 }
 
 int main(int argc, char** argv)
 {
-    if(argc != 4){
+    if(argc != 3){
         printf("too few or less parameter! \n");
         exit(-1);
-    }else if(!strcmp(argv[1], "-r")){
+    }else{
         struct stat get_message;
         
         if(S_ISDIR(get_message.st_mode))
